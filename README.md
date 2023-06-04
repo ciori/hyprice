@@ -23,5 +23,6 @@ Steps:
 ## TODO
 
 List:
+- centralize color/theme/palette management
 - remove every command interaction.
-- add laptop support for wifi, bluetooth and battery and power management.
+- add laptop support for wifi, bluetooth, battery and power management.

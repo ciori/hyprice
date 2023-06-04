@@ -25,17 +25,21 @@ grep -qxF 'export HISTCONTROL=ignoreboth' ~/.bashrc || echo "export HISTCONTROL=
 # install packages
 paru -S hyperland xdg-desktop-portal xdg-desktop-portal-hyprland \
   waybar-hyprland-git swaybg swayidle swaylock bemenu \
-  polkit-kde-agent foot maku pavucontrol htop nm-connection-editor thunar xarchiver \
+  polkit-kde-agent foot maku pavucontrol htop nm-connection-editor thunar xarchiver wob \
   mpv yt-dlp zathura zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps \
   terminus-font ttf-jetbrains-mono-nerd \
   greetsd greetd-tuigreet \
   grim slurp swappy wf-recorder libva-mesa-driver \
-  vscodium-bin thunderbird librewolf torbrowser-launcher
+  vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad
 
 # configure greeter
 sudo sed -i 's/user = "greeter"/#user = "greeter"/g' /etc/pacman.conf
 sudo sed -i 's/command = "agreety --cmd /bin/sh"/command = "tuigreet --cmd Hyprland"/g' /etc/pacman.conf
 sudo systemctl enable greetd.service
+
+# activate firewall
+sudo ufw enable
+sudo ufw systemctl enable --now ufw
 
 # copy dotfiles
 #...
