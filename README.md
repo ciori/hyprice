@@ -80,8 +80,8 @@ Steps:
 - restart the pc
 - what to configure after:
   - audio devices in pavucontrol
-  - wireguard or other vpn in waybar config (interface) if you use them
-  - maybe add a sync client (nextcloud) and/or configure thunderbird 
+  - wireguard or other vpn in waybar config (interface, ip ,etc...) if you use them
+  - maybe add a sync client (nextcloud) and/or configure `thunderbird` 
 
 ## TODO
 
