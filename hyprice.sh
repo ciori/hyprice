@@ -36,7 +36,8 @@ paru -S hyperland xdg-desktop-portal xdg-desktop-portal-hyprland \
   terminus-font ttf-jetbrains-mono-nerd \
   greetsd greetd-tuigreet \
   grim slurp swappy wf-recorder libva-mesa-driver \
-  vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad wireguard-tools
+  vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad \
+  wireguard-tools
 
 # configure greeter
 sudo sed -i 's/user = "greeter"/#user = "greeter"/g' /etc/pacman.conf
