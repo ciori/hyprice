@@ -49,7 +49,7 @@ Some waybar configurations:
   - If you use VPNs, it is recommended to add/import them with the `nmcli` command line so that they are manageble with `nm-connection-editor`
 - Clock:
   - clicking on the widget will display the date instead
-  - right clicking on the widget will open thunderbird
+  - right clicking on the widget will open `thunderbird`
 
 ## Installation
 
@@ -81,7 +81,7 @@ Steps:
 - what to configure after:
   - audio devices in pavucontrol
   - wireguard or other vpn in waybar config (interface, ip ,etc...) if you use them
-  - maybe add a sync client (nextcloud) and/or configure `thunderbird` 
+  - maybe add a sync client (nextcloud) and/or configure thunderbird
 
 ## TODO
 
