@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>foot</icon>
+	<name>Open Foot Terminal</name>
+	<submenu></submenu>
+	<unique-id>1685811908322592-1</unique-id>
+	<command>footclient</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+</actions>

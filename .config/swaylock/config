@@ -1,0 +1,11 @@
+font=Terminus
+font-size=16
+color=000000
+ring-color=33ccff
+ring-ver-color=2b2e37
+show-keyboard-layout
+indicator-idle-visible
+indicator-radius=120
+daemonize
+ignore-empty-password
+show-failed-attempts

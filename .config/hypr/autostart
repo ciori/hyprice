@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+
+# notifications
+mako &
+
+# foot daemon
+foot --server &
+
+# status bar
+waybar &
+
+# wallpaper
+swaybg -i $HOME/.config/wallpaper.jpg &
+
+# polkit
+/usr/lib/polkit-kde-authentication-agent-1 &
+
+# automatic screenlock
+#swayidle -w timeout 300 'swaylock' &
+
+# others
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' &
+gsettings set org.cinnamon.desktop.interface color-scheme 'prefer-dark' &
+gsettings set org.cinnamon.desktop.default-applications.terminal exec footclient &
+gsettings set org.gnome.desktop.default-applications.terminal exec footclient &
+xdg-mime default org.pwmt.zathura.desktop application/pdf
+rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob &
+udiskie --no-automount --tray &

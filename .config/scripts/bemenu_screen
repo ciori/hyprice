@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# bemenu_screen - Simple screen capture menu with bemenu.
+
+show_bemenu() {
+  bemenu \
+    -H 28 \
+    --ignorecase \
+    --monitor '1' \
+    --hp '6' \
+    --fn 'Terminus' \
+    --tb '#000000' \
+    --fb '#000000' \
+    --nb '#000000' \
+    --hb '#000000' \
+    --fbb '#000000' \
+    --ab '#000000' \
+    --sb '#000000' \
+    --tf '#33ccff' \
+    --sf '#33ccff' \
+    --hf '#33ccff' \
+    -p $1
+}
+
+readonly OPTIONS=(
+  "Area"
+  "Screen"
+  #"Record"
+)
+
+# 'grim -g "$(slurp)" ${HOME}/pics/screenshots/screenshot-$(date "+%F-%H-%M-%S").png | wl-copy'
+#  'grim ${HOME}/pics/screenshots/screenshot-$(date "+%F-%H-%M-%S").png | wl-copy'
+#  '...'
+
+readonly ACTIONS=(
+  'grim -g "$(slurp)" - | swappy -f -'
+  'grim - | swappy -f -'
+  #'wf-recorder -g "$(slurp)" -f ${HOME}/videos/recordings/recording-$(date "+%F-%H-%M-%S").mp4 -c h264_vaapi -d /dev/dri/renderD128'
+)
+
+get_index() {
+  for i in "${!OPTIONS[@]}"; do
+    if [ "$1" == "${OPTIONS[i]}" ]; then
+      IDX=$i
+      return
+    fi
+  done
+}
+
+show_menu() {
+  local tmp="Cancel"
+
+  for option in "${OPTIONS[@]}"; do
+    tmp+=$'\n'$option
+  done
+
+  echo "$tmp" | show_bemenu "Screen" | bemenu_screen -r
+}
+
+run_command() {
+  read stdin < /dev/stdin
+  [ "$stdin" == "Cancel" ] && exit
+
+  get_index "$stdin"
+  if [ ! -z "$IDX" ]; then
+    bash -c "${ACTIONS[$IDX]}"
+  fi
+}
+
+case "$1" in
+  "" | "-s" | "--show")
+    show_menu
+    ;;
+
+  "-r" | "--run")
+    run_command
+    ;;
+
+  *)
+    echo "Usage: bemenu_screen [option]"
+    echo "Options:"
+    echo -e "\t-s / --show\tShows the prompt (default)"
+    echo -e "\t-r / --run\tRuns the command"
+esac

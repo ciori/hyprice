@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# bemenu_power - Simple power menu with bemenu.
+
+show_bemenu() {
+  bemenu \
+    -H 28 \
+    --ignorecase \
+    --monitor '1' \
+    --hp '6' \
+    --fn 'Terminus' \
+    --tb '#000000' \
+    --fb '#000000' \
+    --nb '#000000' \
+    --hb '#000000' \
+    --fbb '#000000' \
+    --ab '#000000' \
+    --sb '#000000' \
+    --tf '#33ccff' \
+    --sf '#33ccff' \
+    --hf '#33ccff' \
+    -p $1
+}
+
+readonly OPTIONS=(
+  "PowerOff"
+  "Reboot"
+  "Lock"
+  "Log out"
+)
+
+readonly ACTIONS=(
+  "poweroff"
+  "systemctl reboot"
+  "swaylock"
+  "loginctl terminate-session $XDG_SESSION_ID"
+)
+
+get_index() {
+  for i in "${!OPTIONS[@]}"; do
+    if [ "$1" == "${OPTIONS[i]}" ]; then
+      IDX=$i
+      return
+    fi
+  done
+}
+
+show_menu() {
+  local tmp="Cancel"
+
+  for option in "${OPTIONS[@]}"; do
+    tmp+=$'\n'$option
+  done
+
+  echo "$tmp" | show_bemenu "Power Menu" | bemenu_power -c
+}
+
+confirm_action() {
+  read stdin < /dev/stdin
+  [ "$stdin" == "Cancel" ] && exit
+
+  get_index "$stdin"
+  if [ ! -z "$IDX" ]; then
+    echo -e "Cancel\n$stdin" | show_bemenu "Sure?" | \
+      bemenu_power -r
+  fi
+}
+
+run_command() {
+  read stdin < /dev/stdin
+  [ "$stdin" == "Cancel" ] && exit
+
+  get_index "$stdin"
+  if [ ! -z "$IDX" ]; then
+    bash -c "${ACTIONS[$IDX]}"
+  fi
+}
+
+case "$1" in
+  "" | "-s" | "--show")
+    show_menu
+    ;;
+
+  "-c" | "--confirm")
+    confirm_action
+    ;;
+
+  "-r" | "--run")
+    run_command
+    ;;
+
+  *)
+    echo "Usage: bemenu_power [option]"
+    echo "Options:"
+    echo -e "\t-s / --show\tShows the prompt (default)"
+    echo -e "\t-c / --confirm\tShows the confirmation prompt"
+    echo -e "\t-r / --run\tRuns the command"
+esac

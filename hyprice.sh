@@ -15,12 +15,18 @@ makepkg -si
 cd ..
 rm -rf paru
 
-# create home folders
-mkdir -p downloads documents pics/screenshots videos/recordings music
-
 # bash configuration
 paru -S bash-completion
-grep -qxF 'export HISTCONTROL=ignoreboth' ~/.bashrc || echo "export HISTCONTROL=ignoreboth" >> ~/.bashrc
+grep -qxF 'export HISTCONTROL=ignoreboth' ~/.bashrc \
+  || echo "export HISTCONTROL=ignoreboth" >> ~/.bashrc
+grep -qxF 'export PATH="$HOME/.config/scripts:$PATH"' ~/.bash_profile \
+  || echo 'export PATH="$HOME/.config/scripts:$PATH"' >> ~/.bash_profile
+
+# create home folders
+mkdir -p downloads documents pics/screenshots videos/recordings music share
+
+# copy dotfiles
+cp -r .config ~/
 
 # install packages
 paru -S hyperland xdg-desktop-portal xdg-desktop-portal-hyprland \
@@ -30,7 +36,7 @@ paru -S hyperland xdg-desktop-portal xdg-desktop-portal-hyprland \
   terminus-font ttf-jetbrains-mono-nerd \
   greetsd greetd-tuigreet \
   grim slurp swappy wf-recorder libva-mesa-driver \
-  vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad
+  vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad wireguard-tools
 
 # configure greeter
 sudo sed -i 's/user = "greeter"/#user = "greeter"/g' /etc/pacman.conf
@@ -40,6 +46,3 @@ sudo systemctl enable greetd.service
 # activate firewall
 sudo ufw enable
 sudo ufw systemctl enable --now ufw
-
-# copy dotfiles
-#...

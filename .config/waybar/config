@@ -1,0 +1,81 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "output": "DP-1",
+    "modules-left": ["wlr/workspaces"],
+    "modules-center": ["wlr/taskbar"],
+    "modules-right": ["tray", "pulseaudio", "cpu", "memory", "network#eth", "network#wg", "clock"],
+    "wlr/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "<b>{name}</b>",
+        "persistent_workspaces": {
+            "1": ["HDMI-A-1"],
+            "2": ["DP-1"]
+        }
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 14,
+        "icon-theme": "Adwaita",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-right": "close",
+        "all-outputs": true
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "<span color='#33ccff'><b>VOL</b></span> {volume}% {format_source}",
+        "format-muted": "<span color='#33ccff'><b>VOL</b></span> {volume}% 󰖁  {format_source}",
+        "format-source": "{volume}%",
+        "format-source-muted": "󰍭",
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle",
+        "on-click-middle": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
+        "on-scroll-up": "volume_up",
+        "on-scroll-down": "volume_down"
+    },
+    "cpu": {
+        "format": "<span color='#33ccff'><b>CPU</b></span> {usage}%",
+        "on-click": "footclient -w 1000x700 -T htop htop &"
+    },
+    "memory": {
+        "format": "<span color='#33ccff'><b>MEM</b></span> {}%",
+        "on-click": "footclient -w 1000x700 -T htop htop -s PERCENT_MEM &"
+    },
+    "network#eth": {
+        "interval": 3,
+        "format-ethernet": "<span color='#33ccff'><b>NET</b></span> {bandwidthUpBytes} {bandwidthDownBytes} 󰈀",
+        "tooltip-format": "{ifname} via {ipaddr}/{cidr}",
+        "format-disconnected": "<span color='#33ccff'><b>NET</b></span> ⚠",
+        "on-click": "nm-connection-editor &",
+        "on-click-right": "footclient -w 1000x700 -H -T nmcli nmcli connection show &"
+    },
+    "network#wg": {
+        "interface": "wg-midgard",
+        "interval": 3,
+        "format-ethernet": "<span color='#33ccff'><b>VPN</b></span> 󰖂",
+        "tooltip-format": "{ifname} via {ipaddr}/{cidr}",
+        "format-disconnected": "",
+        "on-click": "nm-connection-editor &",
+        "on-click-right": "footclient -w 1000x700 -H -T nmcli nmcli connection show &"
+    },
+    "clock": {
+        "timezone": "Europe/Rome",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<big><tt>{calendar}</tt></big>",
+        "format": "<span color='#33ccff'><b>DATE</b></span> {:%H:%M}",
+        "format-alt": "<span color='#33ccff'><b>DATE</b></span> {:%d-%m-%Y}",
+        "on-click-right": "thunderbird &",
+        "calendar": {
+            "format": {
+                "today": "<span color='#33ccff'><b><u>{}</u></b></span>"
+            }
+        }
+    }
+}

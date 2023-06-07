@@ -1,0 +1,49 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Terminus";
+  font-size: 14px;
+  min-height: 0;
+}
+
+tooltip {
+  color: white;
+  background-color: black;
+  border: 2px solid rgba(89, 89, 89, 0.67);
+}
+
+window#waybar {
+  background: black;
+  color: white;
+  border-bottom: 2px solid rgba(89, 89, 89, 0.67);
+}
+
+#window {
+  font-weight: bold;
+  font-family: "Terminus";
+}
+
+#workspaces {
+  padding: 0 5px;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  color: white;
+}
+
+#workspaces button.active {
+  color: rgba(51, 204, 255, 0.93);
+}
+
+#taskbar button.active {
+  color: rgba(51, 204, 255, 0.93);
+}
+
+#clock, #cpu, #memory, #network, #pulseaudio, #tray {
+  padding: 0 5px;
+}
+
+#clock, #pulseaudio {
+  padding-right: 10px;
+}
