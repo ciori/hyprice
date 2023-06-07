@@ -19,11 +19,11 @@ There are some requirements/limitations:
 
 Steps:
 - start from a fresh installation of archlinux:
-  - use the `archinstall` tool
+  - use the [archinstall](https://github.com/archlinux/archinstall) tool
   - select a minimal profile
   - select networkmanager
   - create a sudo user (non root)
-  - add `git wget curl` as additional packages
+  - add `git` as additional packages
 - boot into the new system and login as your non root user
 - run the script:
   ```
