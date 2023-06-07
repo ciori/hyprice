@@ -23,7 +23,7 @@ Steps:
   - select a minimal profile
   - select networkmanager
   - create a sudo user (non root)
-  - add `git` as additional packages
+  - add `git` as an additional package
 - boot into the new system and login as your non root user
 - run the script:
   ```
