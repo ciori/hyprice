@@ -21,6 +21,8 @@ grep -qxF 'export HISTCONTROL=ignoreboth' ~/.bashrc \
   || echo "export HISTCONTROL=ignoreboth" >> ~/.bashrc
 grep -qxF 'export PATH="$HOME/.config/scripts:$PATH"' ~/.bash_profile \
   || echo 'export PATH="$HOME/.config/scripts:$PATH"' >> ~/.bash_profile
+grep -qxF 'export EDITOR=vim' ~/.bash_profile \
+  || echo 'export EDITOR=vim' >> ~/.bash_profile
 
 # create home folders
 mkdir -p downloads documents pics/screenshots videos/recordings music share
@@ -36,7 +38,7 @@ paru -S hyperland xdg-desktop-portal xdg-desktop-portal-hyprland \
   terminus-font ttf-jetbrains-mono-nerd \
   greetsd greetd-tuigreet \
   grim slurp swappy wf-recorder libva-mesa-driver \
-  vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad \
+  vim vscodium-bin thunderbird librewolf torbrowser-launcher ufw mousepad \
   wireguard-tools
 
 # configure greeter
